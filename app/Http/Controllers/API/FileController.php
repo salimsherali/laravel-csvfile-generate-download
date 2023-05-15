@@ -45,7 +45,8 @@ class FileController extends Controller
             // save token and file path to database
             $file = new File();
             $file->token = $token;
-            $file->path = $path;
+            // For fixing the path issue 
+            $file->path = str_replace('app/public/', 'public/', str_replace('\\', '/', $path));
             $file->user_id = auth('api')->user()->id;
             $file->save();
 
